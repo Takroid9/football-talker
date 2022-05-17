@@ -1,0 +1,22 @@
+<div class="container">
+  <%= form_with model: @contact, url: contacts_path, local:true do |f| %>
+  <table class="table">
+    <ul>
+      <li>お問い合わせ</li>
+      <li><%= f.select :title, [["選手作成依頼","選手作成依頼"],["利用方法について","利用方法"],["その他","その他"]], include_blank: "選択してください" %></li>
+    </ul>
+
+    <ul>
+      <li>お問い合わせ内容</li>
+      <li><%= f.text_area :body, class: "comment-box" %></li>
+    </ul>
+
+    <ul>
+      <li>お問い合わせ内容を確認して下さい</li>
+      <li><%= f.check_box :is_check %> 確認しました</li>
+    </ul>
+  </table>
+  
+  <%= f.submit '提出する', class: "btn btn-warning" %>
+  <% end %>
+</div>

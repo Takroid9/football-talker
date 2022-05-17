@@ -1,0 +1,9 @@
+ja:
+  enums:
+    player:
+      foot:
+        right: '右'
+        left: '左'
+      is_active:
+        active: '現役'
+        retirement: '引退'

@@ -1,0 +1,14 @@
+<h1>Admin::Contacts#index</h1>
+<div class="container">
+  <% @contacts.each do |contact| %>
+  <table class="table">
+    <tr>
+      <th><%= contact.title %></th>
+      <td><%= contact.body %></td>
+      <td><%= contact.is_complete %></td>
+      <td><%= contact.created_at %></td>
+      <td><%= link_to 'show', admin_contact_path(contact.id) %></td>
+    </tr>
+  </table>
+  <% end %>
+</div>

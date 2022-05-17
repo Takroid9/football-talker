@@ -1,0 +1,22 @@
+<h1>Admin::Leagues#show</h1>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>チーム名</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+    <% @teams.each do |team| %>
+      <tr>
+        <td><%= team.short_name %></th>
+        <td><%= link_to team.name, admin_team_path(team.id) %></td>
+      </tr>
+    <% end  %>
+    </tbody>
+  </table>
+  <%= link_to 'ホーム', admin_homes_top_path %>
+  <%= link_to 'リーグ一覧に戻る', admin_leagues_path %>
+</div>

@@ -1,0 +1,36 @@
+<h1>Admin::Teams#new</h1>
+<div class="container">
+  <%= form_with model: @team, url: admin_teams_path, local:true do |f| %>
+    <table>
+      <tr class="form-group">
+        <th><label for="league">所属リーグ</label></th>
+        <td><%= f.collection_select(:league_id, @leagues, :id, :name) %></td>
+      </tr>
+      
+      <tr class="form-group">
+        <th><label for="team-name">チーム名</label></th>
+        <td><%= f.text_field :name %></td>
+      </tr>
+      
+      <tr class="form-group">
+        <th><label for="team-name">略称名</label></th>
+        <td><%= f.text_field :short_name %></td>
+      </tr>
+      
+      <tr class="form-group">
+        <th><label for="stadium">本拠地</label></th>
+        <td><%= f.text_field :stadium %></td>
+      </tr>
+      
+      <tr class="form-group">
+        <th><label for="coach-name">監督名</label></th>
+        <td><%= f.text_field :coach %></td>
+      </tr>
+    </table>
+
+
+    <div class="actions">
+      <%= f.submit '追加する', class: "btn btn-success" %>
+    </div>
+  <% end %>
+</div>

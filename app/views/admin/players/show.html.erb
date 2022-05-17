@@ -1,0 +1,7 @@
+<h1>Admin::Players#show</h1>
+  <%= render 'admin/players/player', player: @player, comment: @comment %>
+
+<%= link_to '編集する', edit_admin_player_path(@player.id) %>
+
+<%= link_to 'ホーム', admin_homes_top_path %>
+<%= link_to 'チームに戻る', admin_team_path(@player.team_id) %>

@@ -1,0 +1,19 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>国・地域</th>
+        <th>リーグ名</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <% @leagues.each do |league| %>
+      <tr>
+        <td><%= league.country %></td>
+        <td><%= link_to league.name, league_path(league.id) %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,27 @@
+<h1>Admin::Players#index</h1>
+<div class="container">
+
+<%= link_to '追加する', new_admin_player_path, class: "btn btn-primary" %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>選手名</th>
+      <th>チーム名</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% @players.each do |player| %>
+    <tr>
+      <td><%= player.name %></td>
+      <td><%= player.team.short_name %></td>
+      <td><%= link_to 'show', admin_player_path(player.id), class: "btn btn-primary" %></td>
+      <td><%= link_to 'edit', edit_admin_player_path(player.id), class: "btn btn-primary" %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'ホーム', admin_homes_top_path %>
+</div>

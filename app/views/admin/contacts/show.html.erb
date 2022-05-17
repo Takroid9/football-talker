@@ -1,0 +1,32 @@
+<h1>Admin::Contacts#show</h1>
+<div class="container">
+  <table class="table">
+    <tr>
+      <th>問い合わせしたユーザー</th>
+      <td><%= @contact.talker.name %></td>
+    </tr>
+    <tr>
+      <th>タイトル</th>
+      <td><%= @contact.title %></td>
+    </tr>
+    <tr>
+      <th>内容</th>
+      <td><%= @contact.body %></td>
+    </tr>
+    
+    <%= form_with model: @contact, url: admin_contact_path(@contact.id), local:true do |f| %>
+    <tr>
+      <th>お問い合わせ対応の完了</th>
+      <td><%= f.check_box :is_complete %></td>
+    </tr>
+    <tr>
+      <th></th>
+      <td><%= f.submit '更新', class: "btn btn-success" %></td>
+    </tr>
+    <% end %>
+    <tr>
+      <th></th>
+      <td><%= link_to '戻る', admin_contacts_path, class: "btn btn-danger" %></td>
+    </tr>
+  </table>
+</div>

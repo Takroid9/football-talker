@@ -1,0 +1,25 @@
+<h1>Admin::Leagues#index</h1>
+<div class="container">
+
+<%= link_to '追加する', new_admin_league_path, class: "btn btn-primary" %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>国・地域</th>
+      <th>リーグ名</th>
+      <th></th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% @leagues.each do |league| %>
+    <tr>
+      <td><%= league.country %></td>
+      <td><%= link_to league.name, admin_league_path(league.id) %></td>
+      <td><%= link_to 'edit', edit_admin_league_path(league.id), class: "btn btn-primary" %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'ホーム', admin_homes_top_path %>
+</div>

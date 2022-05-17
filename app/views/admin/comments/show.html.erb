@@ -1,0 +1,17 @@
+<div class="container">
+  <table class="table">
+    <tr>
+      <th>投稿者</th>
+      <td><%= link_to @comment.talker.name, talker_path(@comment.talker.id) %></td>
+    </tr>
+    <tr>
+      <th></th>
+      <td><%= link_to @comment.player.name, player_path(@comment.player_id) %></td>
+    </tr>
+    <tr>
+      <th></th>
+      <td><%= @comment.body %></td>
+    </tr>
+  </table>
+  
+ </div>

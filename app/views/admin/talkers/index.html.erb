@@ -1,0 +1,13 @@
+<h1>Admin::Talkers#index</h1>
+<div class="container">
+  <table class="table">
+  <% @talkers.each do |talker| %>
+  <tr>
+    <td><%= talker.id %></td>
+    <td><%= talker.name %></td>
+    <td><%= link_to 'show', admin_talker_path(talker.id) %></td>
+  </tr>
+  <% end %>
+  </table>
+  <%= link_to 'ホーム', admin_homes_top_path %>
+</div>

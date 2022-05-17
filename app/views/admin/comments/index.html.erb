@@ -1,0 +1,27 @@
+<h1>Admin::Comments#index</h1>
+
+<div class="container">
+  <table class="table">
+    <thead>
+      <th>ID</th>
+      <th>投稿者</th>
+      <th>コメント</th>
+      <th>いいね数</th>
+      <th>投稿日時</th>
+    </thead>
+    
+    <tbody>
+      <% @comments.each do |comment| %>
+        <tr>
+          <td><%= comment.talker.id %></td>
+          <td><%= comment.talker.name %></td>
+          <td><%= comment.body %></td>
+          <td><%= comment.favorites.count %></td>
+          <td><%= comment.created_at %></td>
+          <td><%= link_to 'show', comment_path(comment), class:"btn btn-primary" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<p>Find me in app/views/admin/comments/index.html.erb</p>

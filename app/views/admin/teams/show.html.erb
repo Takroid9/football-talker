@@ -1,0 +1,39 @@
+<h1>Admin::Teams#show</h1>
+<div class="container">
+  <h2><%= @team.name %></h2>
+  <div class="row flex-box">
+  <div class="col-md-4">
+    <h4>チーム情報</h4>
+    <table class="table">
+      <tr>
+        <th>監督</th>
+        <td><%= @team.coach %></td>
+      </tr>
+      
+      <tr>
+        <th>略称名</th>
+        <td><%= @team.short_name %></td>
+      </tr>
+      
+      <tr>
+        <th>本拠地</th>
+        <td><%= @team.stadium %></td>
+      </tr>
+    </table>
+  </div>
+  
+  <div class="col-md-6">
+    <h4>選手一覧</h4>
+    <table class="table">
+      <% @players.each do |player| %>
+      <tr>
+        <th><%= player.number %></th>
+        <td><%= link_to player.name, admin_player_path(player.id) %></td>
+        <td><%= player.position %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+  </div>
+  <%= link_to 'リーグに戻る', admin_league_path(@team.league_id) %>
+</div>

@@ -1,0 +1,44 @@
+
+<div class="container">
+  
+  <div class="talker-status row">
+    <div class="col-md-6">
+      <div class="greet center">
+        <% if @talker.id == current_talker.id %>
+          <%= @greet %>
+        <% else %>
+          <%= "#{@talker.name}さんのページです。" %>
+        <% end %>
+      </div>
+      
+      <table class="table ">
+        <ul>
+          <% if @talker.id == current_talker.id %>
+            <li><%= link_to 'ユーザー名を変更する', edit_talker_path(@talker), class: "fas fa-user-edit", style: "color: black" %></li>
+            <li><%= link_to 'コメント一覧', comments_path, class: "fas fa-comment", style: "color: black" %></li>
+            <li><%= link_to "通知一覧", notifications_path, class: "fas fa-exclamation-circle", style: "color: black" %></li>
+            <% if unchecked_notifications.any? %>
+              <i class="fa fa-circle" style="color: gold;"></i>
+            <% end %>
+          <% end %>
+        </ul>
+      </table>  
+    </div>
+    
+    
+    <div class="recommend_list col-md-4">
+      <div class="recommend_list_title">
+        <% if @talker.id == current_talker.id %>
+          <p>お気に入り選手</p>
+        <% else %>
+          <%= tag.p"#{@talker.name} さんのお気に入り選手" %>
+        <% end %>
+      </div>
+      <div class="recommend_list_body">
+        <% @recommends.each_with_index do |recommend, index| %>
+            <%= link_to recommend.player.name, player_path(recommend.player_id), class:"recommend-player" %>
+        <% end %> 
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="container">
+  <table class="table">
+    <tr>
+      <th>投稿者</th>
+      <th><%= link_to @comment.talker.name, talker_path(@comment.talker_id) %></th>
+    </tr>
+    <tr>
+      <th></th>
+      <th><%= link_to @comment.player.name, player_path(@comment.player_id) %></th>
+    </tr>
+    <tr>
+      <th></th>
+      <th><%= @comment.body %></th>
+    </tr>
+  </table>
+  
+  <% if @comment.replies.count != 0 %>
+    <div class="reply-area">
+      <div class="content-name">
+        <h4>このコメントに対しての返信</h4>
+      </div>
+    <% @comment.replies.order(:created_at).each do |reply| %>
+      <%= link_to reply.talker.name, talker_path(reply.talker_id) %>
+      <%= reply.body %>
+    <% end %>
+  <% end %>
+  </div>
+  
+ </div>

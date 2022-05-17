@@ -1,0 +1,161 @@
+
+  <h2><%= player.lead_name %></h2>
+  <div class="recommends">
+    <% if talker_signed_in? %>
+      <% if current_talker.recommends.find_by(player_id: player.id) %>
+        <%= link_to ' お気に入りから外す', player_recommend_path(player.id), method: :delete, class: "fas fa-backspace btn btn-warning" %>
+      <% elsif current_talker.recommends.count < 11 %>
+        <%= link_to ' お気に入りに登録する', player_recommends_path(player.id), method: :post, class: "fas fa-bookmark btn btn-warning" %>
+      <% end %>
+    <% end %>
+  </div>
+  
+  <div class="row">
+  <table class="table table-bordered col-md-6 player-data">
+    <tr>
+      <th>選手名</th>
+      <td><%= player.name %></td>
+    </tr>
+    
+    <tr>
+      <th>所属チーム</th>
+      <td><%= player.team.name %></td>
+    </tr>
+    
+    <tr>
+      <th>背番号</th>
+      <td><%= player.number %></td>
+    </tr>
+    
+    <tr>
+      <th>ポジション</th>
+      <td><%= player.position %></td>
+    </tr>
+    
+    <tr>
+      <th>国籍</th>
+      <td><%= player.country %></td>
+    </tr>
+    
+    <tr>
+      <th>利き足</th>
+      <td><%= player.foot_i18n %></td>
+    </tr>
+    
+    <tr>
+      <th>誕生日</th>
+      <td>
+        <%= @year %>年
+        <%= @month %>月
+        <%= @day %>日
+      </td>
+    </tr>
+    
+    <tr>
+      <th>年齢</th>
+      <td><%= @age %>歳</td>
+    </tr>
+    
+    <tr>
+      <th>身長</th>
+      <td><%= player.height %>cm</td>
+    </tr>
+    
+    <tr>
+      <th>体重</th>
+      <td><%= player.weight %>kg</td>
+    </tr>
+    
+    <tr>
+      <th></th>
+      <td><%= player.is_active_i18n %></td>
+    </tr>
+  </table>
+  
+  <div class="comment-area">
+    <% if current_page?(controller: "public/players", action: "show") && talker_signed_in? %>
+    <div class="new-comment-box">
+      <%= form_with(model:[player, comment], local:true) do |f| %>
+        <%= f.text_area :body, placeholder: "コメントを入力してください", class: "comment-box" %>
+        <%= f.submit "コメントする" %>
+      <% end %>
+    </div>
+      
+      <% player.comments.each do |comment| %>
+      
+      <% if comment.parent_id.present? || comment.id.blank? %>
+        <% next %>
+      <% end %>
+      <div class="comment-container">
+        
+        <div class="comment-box">
+          
+          <%= link_to comment.talker.name, talker_path(comment.talker_id) %></br>
+          <%= comment.body %>
+          <%= comment.created_at.strftime('%Y/%m/%d %H:%M') %>
+          
+          <% if comment.favorited_by?(current_talker) %>
+            <p>
+            <%= link_to player_comment_favorites_path(player, comment), method: :delete do %>
+              ♥<%= comment.favorites.count %>
+            <% end %>
+            </p>
+          <% else %>
+            <p>
+            <%= link_to player_comment_favorites_path(player, comment), method: :post do %>
+              ♡<%= comment.favorites.count %>
+            <% end %>
+            </p>
+          <% end %> 
+          
+            <%= link_to '詳細を見る', comment_path(comment) %>
+          <% if comment.talker == current_talker %>
+            <%= link_to '編集する', edit_player_comment_path(comment.player, comment) %>
+            <%= link_to '削除する', player_comment_path(comment.player, comment), method: :delete %>
+          <% end %>
+        </div>
+          
+        
+          
+        <div class="reply">
+          <% comment.replies.order(:created_at).each do |reply| %>
+            <%= link_to reply.talker.name, talker_path(reply.talker_id) %></br>
+            <%= reply.body %>
+            <%= reply.created_at.strftime('%Y/%m/%d %H:%M') %>
+            <% if reply.favorited_by?(current_talker) %>
+              <p>
+              <%= link_to player_comment_favorites_path(player, reply), method: :delete do %>
+                ♥<%= reply.favorites.count %>
+              <% end %>
+              </p>
+            <% else %>
+              <p>
+              <%= link_to player_comment_favorites_path(player, reply), method: :post do %>
+                ♡<%= reply.favorites.count %>
+              <% end %>
+              </p>
+            <% end %> 
+              <%= link_to '詳細を見る', comment_path(reply.id) %>
+            <% if reply.talker == current_talker %>
+              <%= link_to '編集する', edit_player_comment_path(reply.player, reply) %>
+              <%= link_to '削除する', player_comment_path(reply.player, reply), method: :delete %>
+            <% end %>
+          <% end %>
+        </div>
+        
+        <div class="reply-new">
+          <%= form_with(model:[player,comment_reply]) do |f| %>
+            <%= f.text_area :body, placeholder: "コメントを入力してください", class: "reply-box" %>
+            <%= f.hidden_field :player_id, value: player.id %>
+            <%= f.hidden_field :parent_id, value: comment.id %>
+            <%= f.submit '返信する' %>
+          <% end %>
+        </div>
+      </div>
+      
+      
+      <% end %>
+    <% end %>
+  </div>
+  </div>
+  <%= link_to "#{@player.team.name}のページに戻る", team_path(@player.team_id) %>

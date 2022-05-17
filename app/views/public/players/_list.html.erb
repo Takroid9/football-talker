@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="search">
+    <div class="search-choiced">
+      <%= link_to 'お気に入りの多い順', search_players_path(recommend: 'true'), {class: 'sort_link' "{#'active' if current_page?('/players/search?recommend=true')}"} %>
+    </div>
+    
+    <div class="search-choiced">
+      <%= link_to 'コメントの多い順', search_players_path(comment: 'true'), {class: 'sort_link' "{#'active' if current_page?('/players/search?comment=true')}"} %>
+    </div>
+    
+    
+    <div class="search-keyword">
+      <%= form_with(url: search_players_path, local: true, method: :get, style: "display: inline; float: right;") do |f| %>
+        <%= f.text_field :keyword, placeholder: "選手名を入力してください", id: 'search_form' %>
+        <%= f.submit '検索' %>
+      <% end %>
+    </div>
+  </div>
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th>選手名</th>
+        <th>チーム名</th>
+        <th>お気に入り数</th>
+        <th>コメント数</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <% players.each do |player| %>
+      <tr>
+        <td><%= link_to player.name, player_path(player.id )%></td>
+        <td><%= player.team.short_name %></td>
+        <td><%= player.recommends.count %></td>
+        <td><%= player.comments.count %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate players %>
+  <%= link_to 'ホーム', root_path %>
+</div>

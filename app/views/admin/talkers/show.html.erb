@@ -1,0 +1,22 @@
+<h1>Admin::Talkers#show</h1>
+<div class="container">
+  <table class="table">
+    <tr>
+      <th>Name</th>
+      <td><%= @talker.name %></td>
+    </tr>
+  </table>
+  
+  <table>
+    <div class="recommend_list_title">
+      <%= tag.p"#{@talker.name} さんのお気に入り選手" %>
+    </div>
+    <div class="recommend_list_body">
+      <% @recommends.each_with_index do |recommend, index| %>
+        <%= link_to recommend.player.name, player_path(recommend.player_id), class:"recommend-player" %>
+      <% end %> 
+    </div>
+  </table>
+  
+  <%= link_to "一覧に戻る", admin_talkers_path %>
+</div>

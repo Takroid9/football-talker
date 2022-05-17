@@ -1,0 +1,15 @@
+<div class="container">
+  <%= form_with model:@talker, local:true do |f| %>
+    <table class="table">
+      <tr class="form-group">
+        <th>Name</th>
+        <td><%= f.text_field :name %></td>
+      </tr>
+      
+      <tr class="actions">
+        <th></th>
+        <td><%= f.submit '登録する', class: "btn btn-primary" %></td>
+      </tr>
+    </table>
+  <% end %>
+</div>

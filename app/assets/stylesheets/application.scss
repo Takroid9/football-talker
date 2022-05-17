@@ -1,0 +1,127 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import "bootstrap";
+
+.fa .fas {
+  font-famiry: 'Font Awesome 5 Free';
+  font-weight: 600;
+  line-height: normal;
+}
+
+.center {
+  text-align: center;
+}
+
+.info-sentence {
+  margin-top: 80px;
+  font-size: 25px;
+}
+
+.container {
+  margin-top: 20px;
+}
+
+.container-header {
+  margin-top: 0px;
+}
+
+.greet {
+  margin: 20px;
+  font-size: 25px;
+}
+
+li {
+  list-style: none;
+}
+
+.search{
+  .search-choiced{
+    display: inline;
+    flort: left;
+  }
+  
+  .search-keyword{
+    display: inline;
+    flort: right;
+    margin-bottom: 5px;
+  }
+}
+
+
+.recommend_list {
+
+  
+  .recommend_list_body, .recommend_list_title {
+    border: 1px solid #dee2e6;
+  }
+  
+  .recommend_list_title {
+    p {
+      text-align: center;
+      margin: auto;
+      padding: 10px;
+    }
+  }
+  
+  .recommend_list_body {
+    a {
+      display: block;
+      border: 1px solid #dee2e6;
+    }
+    
+    .recommend-player{
+      padding: 5px;
+    }
+  }
+}
+
+.comment-area{
+  margin: 0 auto;
+}
+.comment-box, .reply-box{
+  width: 100%;
+}
+
+.reply-box{
+  height: 30px;
+} 
+
+.recommends{
+  margin: 10px;
+}
+
+.team-name, .league-name, .content-name {
+  margin: 15px;
+}
+
+.player-data {
+  height: 540px;
+}
+
+.content-center{
+  margin: 0 auto;
+}
+
+.thanks-message {
+  margin-top: 100px;
+}
+
+.comment-container {
+  border: 1px solid;
+  margin-top: 5px;
+  padding: 5px;
+  
+}

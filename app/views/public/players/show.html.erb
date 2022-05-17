@@ -1,0 +1,9 @@
+<div class="container">
+<% if @comment.errors.any? %>
+    <%= @comment.errors.full_messages.each do |message| %>
+      <%= message %>
+    <% end %>
+  <% end %>  
+<%= render 'admin/players/player', player: @player, comment: @comment, comment_reply: @comment_reply %>
+
+</div>

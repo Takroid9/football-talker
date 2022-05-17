@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="content-center">
+    <div class="content-name">
+      <h4>コメント編集</h4>
+    </div>
+   
+    <%= form_with(model:[@player, @comment], url: comment_path(@comment.id), local:true) do |f| %>
+      <%= f.text_area :body, class: "comment-box" %>
+      <%= f.submit '更新する', class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
