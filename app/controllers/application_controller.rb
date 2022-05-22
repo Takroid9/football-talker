@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_talker!,except: [:top], unless: :admin_signed_in?
-  before_action :authenticate_admin!, unless: :talker_signed_in?
+  before_action :authenticate_admin!,except: [:top], unless: :talker_signed_in?
 
   
   
