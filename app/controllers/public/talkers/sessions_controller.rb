@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Talkers::SessionsController < Devise::SessionsController
+class Public::Talkers::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in

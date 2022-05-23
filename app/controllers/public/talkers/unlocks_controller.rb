@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Talkers::UnlocksController < Devise::UnlocksController
+class Public::Talkers::UnlocksController < Devise::UnlocksController
   # GET /resource/unlock/new
   # def new
   #   super
