@@ -36,7 +36,8 @@ class Public::CommentsController < ApplicationController
   end
 
   def destroy
-    Comment.find_by(id: params[:id]).destroy
+    comment = Comment.find(params[:id])
+    comment.destroy
     redirect_to player_path(params[:player_id])
   end
 
