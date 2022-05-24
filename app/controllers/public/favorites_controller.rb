@@ -4,10 +4,9 @@ class Public::FavoritesController < ApplicationController
     comment = Comment.find(params[:comment_id])
     favorite = current_talker.favorites.new(comment_id: comment.id)
     favorite.save
-    @item = comment
-    @item.create_notification_by(current_talker)
+    @player.create_notification_favorite!(current_talker, comment)
     redirect_to player_path(@player)
-    
+
   end
 
   def destroy

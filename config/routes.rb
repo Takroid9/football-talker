@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
 
 
-  
- 
+
+
   devise_for :admins
   devise_for :talkers
-  
+
   scope module: :public do
     root to: 'homes#top'
     resources :leagues, only: [:index, :show]
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       get 'search/sort_comment', to: 'players#search', as: 'sort_comment'
     resources :players, only: [:index, :show, :edit, :update] do
       resources :recommends, only: [:create, :destroy]
-      resources :comments, only: [:index, :show, :edit, :update, :create, :destroy] do
+      resources :comments, only: [:index, :edit, :update, :create, :destroy] do
         resource :favorites, only: [:create, :destroy]
       end
       collection do
@@ -27,9 +27,9 @@ Rails.application.routes.draw do
     get '/contacts/complete' => 'contacts#complete'
     resources :recommends
     resources :notifications, only: [:index]
-    
+
   end
-  
+
   namespace :admin do
     get 'homes/top'
     resources :leagues

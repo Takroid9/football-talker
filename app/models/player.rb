@@ -24,13 +24,14 @@ class Player < ApplicationRecord
   scope :comment, -> {include(:comment).sort}
   scope :old, -> {order(updated_at: :asc)}
 
-  def create_notification_favorite!(current_talker)#いいね通知
-  favorite = Notification.where(["visitor_id = ? and visited_id = ? and player_id = ? and action = ?", current_talker.id, talker_id, id, 'favorite'])
+  def create_notification_favorite!(current_talker, comment)#いいね通知
+  favorite = Notification.where(["visitor_id = ? and visited_id = ? and player_id = ? and action = ?", current_talker.id, comment.talker_id, id, 'favorite'])
 
     if favorite.blank?
       notification = current_talker.active_notifications.new(
         player_id: id,
-        visited_id: talker_id,
+        comment_id: comment.id,
+        visited_id: comment.talker_id,
         action: 'favorite'
       )
 
@@ -41,16 +42,16 @@ class Player < ApplicationRecord
     end
   end
 
-  def create_notification_comment!(current_talker, comment)#コメント通知
+  def create_notification_comment!(current_talker, comment_id)#コメント通知
     temp_ids = Comment.select(:talker_id).where(player_id: id).where.not(talker_id: current_talker.id).distinct
 
     temp_ids.each do |temp_id|
-      save_notification_comment!(current_talker, comment, temp_id['talker_id'])
+      save_notification_comment!(current_talker, comment_id, temp_id['talker_id'])
     end
-    save_notification_comment!(current_talker, comment) if temp_ids.blank?
+    save_notification_comment!(current_talker, comment_id, talker_id) if temp_ids.blank?
   end
 
-  def save_notification_comment!(current_talker, comment)
+  def save_notification_comment!(current_talker, comment, talker_id)
       notification = current_talker.active_notifications.new(
         player_id: id,
         comment_id: comment.id,
