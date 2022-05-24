@@ -1,12 +1,12 @@
 class Public::CommentsController < ApplicationController
   def index
     @comments = current_talker.comments.reverse_order
-  end 
-  
+  end
+
   def show
     @comment = Comment.find(params[:id])
-  end 
-  
+  end
+
   def create
     player = Player.find(params[:player_id])
     comment = current_talker.comments.new(comment_params)
@@ -20,12 +20,12 @@ class Public::CommentsController < ApplicationController
         redirect_to player_path(player)
       end
   end
-  
+
   def edit
     @comment = Comment.find(params[:id])
     @player = @comment.player.id
   end
-  
+
   def update
     @comment = Comment.find(params[:id])
     if @comment.update(comment_params)
@@ -33,16 +33,16 @@ class Public::CommentsController < ApplicationController
     else
       render :edit
     end
-  end 
-  
+  end
+
   def destroy
     Comment.find_by(id: params[:id]).destroy
     redirect_to player_path(params[:player_id])
   end
-  
+
   private
-  
+
   def comment_params
     params.require(:comment).permit(:body, :player_id, :talker_id, :parent_id)
-  end 
+  end
 end
