@@ -8,9 +8,6 @@ class Public::FavoritesController < ApplicationController
     @item.create_notification_by(current_talker)
     redirect_to player_path(@player)
     
-    # @player = favorite.player
-    # @player.save
-    
   end
 
   def destroy
