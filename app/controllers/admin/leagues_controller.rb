@@ -1,8 +1,10 @@
 class Admin::LeaguesController < ApplicationController
+  before_action :authenticate_admin!
+  
   def new
     @league = League.new
   end
-  
+
   def create
     @league = League.new(league_params)
     if @league.save
@@ -11,7 +13,7 @@ class Admin::LeaguesController < ApplicationController
       render :index
     end
   end
-  
+
   def index
     @leagues = League.all
   end
@@ -25,15 +27,15 @@ class Admin::LeaguesController < ApplicationController
   def edit
     @league = League.find(params[:id])
   end
-  
+
   def update
     @league = League.find(params[:id])
     @league.update(league_params)
     redirect_to admin_leagues_path
   end
-  
+
   private
-  
+
   def league_params
     params.require(:league).permit(:name, :country, :division)
   end

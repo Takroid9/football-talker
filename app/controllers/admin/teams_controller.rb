@@ -1,9 +1,10 @@
 class Admin::TeamsController < ApplicationController
+  before_action :authenticate_admin!
   def new
     @team = Team.new
     @leagues = League.all
   end
-  
+
   def create
     @team = Team.new(team_params)
     if @team.save
@@ -27,16 +28,16 @@ class Admin::TeamsController < ApplicationController
     @team = Team.find(params[:id])
     @leagues = League.all
   end
-  
+
   def update
     @team = Team.find(params[:id])
     @team.update(team_params)
     redirect_to admin_team_path(@team.id)
   end
-    
-  
+
+
     private
-  
+
   def team_params
     params.require(:team).permit(:name, :short_name, :league_id, :stadium, :coach)
   end
